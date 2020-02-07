@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ranaaditya.nitt_central.API.Api;
+import com.ranaaditya.nitt_central.Home.HomeActivity;
 import com.ranaaditya.nitt_central.Models.LoginResponseModel;
 
 import retrofit2.Call;
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("Token",response.body().getToken());
                             editor.commit();
                             Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(getApplicationContext(), HomeActivity.class);
+                            startActivity(intent);
                         }
                         else {
                             Toast.makeText(getApplicationContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
