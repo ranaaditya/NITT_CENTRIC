@@ -3,9 +3,9 @@ package com.ranaaditya.nitt_central.Models;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponseModel {
-    @SerializedName("Token")
+    @SerializedName("token")
     String token;
-    @SerializedName("StatusCode")
+    @SerializedName("status_code")
     int code;
 
     public LoginResponseModel(String token, int code) {

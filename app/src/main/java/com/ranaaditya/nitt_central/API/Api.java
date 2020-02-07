@@ -8,7 +8,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface Api {
-    String base_url="http://localhost:8000/";
+    String base_url="http://10.1.96.200:8000/";
 
     @FormUrlEncoded
     @POST("login")
