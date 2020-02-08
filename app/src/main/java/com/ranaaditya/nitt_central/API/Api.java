@@ -11,7 +11,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface Api {
-    String base_url="http://10.1.96.200:8000/";
+    String base_url="http://10.1.96.247:8000/";
 
     @FormUrlEncoded
     @POST("login")
@@ -20,6 +20,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("getShops")
-    Call<ArrayList<ShopModel>> getShops(@Field("lat") String lat,
-                                        @Field("lon") String lon);
+    Call<ArrayList<ShopModel>> getShops(@Field("latitude") Double lat,
+                                        @Field("longitude") Double lon,
+                                        @Field("token") String token);
 }
