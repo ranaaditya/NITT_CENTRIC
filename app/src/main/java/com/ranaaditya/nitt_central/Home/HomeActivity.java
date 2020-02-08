@@ -116,9 +116,9 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     Intent intent=new Intent(getApplicationContext(),PaymentActivity.class);
-                    intent.putExtra("payment_upi_id","shohanduttaroy99@oksbi");
+                    intent.putExtra("payment_upi_id",mresponse.get(0).getUpi());
                     intent.putExtra("payment_note","111118114");
-                    intent.putExtra("payment_name","shohan roy");
+                    intent.putExtra("payment_name",mresponse.get(0).getName());
                     startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
