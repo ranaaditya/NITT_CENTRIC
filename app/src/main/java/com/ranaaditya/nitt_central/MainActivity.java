@@ -1,6 +1,10 @@
 package com.ranaaditya.nitt_central;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -8,6 +12,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -37,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText roll,pass;
     Button login;
+    ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +95,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        DrawerLayout drawerLayout=findViewById(R.id.drawermain);
+         toggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.app_name,R.string.app_name);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(toggle.onOptionsItemSelected(item)) return true;
+        int itemid=item.getItemId();
+        switch (itemid){
+            case  R.id.admin : Toast.makeText(MainActivity.this,"HELLO FRND",Toast.LENGTH_SHORT);
+            case R.id.council :  Toast.makeText(MainActivity.this,"HELLO FRND",Toast.LENGTH_SHORT);
+            case R.id.academics : Toast.makeText(MainActivity.this,"HELLO FRND",Toast.LENGTH_SHORT);
+            case  R.id.shops : Toast.makeText(this,"HELLO FRND",Toast.LENGTH_SHORT);
+            case  R.id.applogout : Toast.makeText(this,"HELLO FRND",Toast.LENGTH_SHORT);
+        }
+return super.onOptionsItemSelected(item);
+    }
 
 }
