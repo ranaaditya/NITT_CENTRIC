@@ -38,6 +38,7 @@ import com.ranaaditya.nitt_central.Form.FormsActivity;
 import com.ranaaditya.nitt_central.Fragments.AdminFragment;
 import com.ranaaditya.nitt_central.Fragments.FestFragment;
 import com.ranaaditya.nitt_central.Fragments.OthersFragment;
+import com.ranaaditya.nitt_central.Fragments.RegisterFragment;
 import com.ranaaditya.nitt_central.Fragments.ShopsFragment;
 import com.ranaaditya.nitt_central.Home.HomeActivity;
 import com.ranaaditya.nitt_central.Maps.MapsActivity;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     OthersFragment othersFragment=OthersFragment.newInstance();
     ShopsFragment shopsFragment=ShopsFragment.newInstance();
     FestFragment festFragment=FestFragment.newInstance();
+    RegisterFragment registerFragment=RegisterFragment.newInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,4 +173,11 @@ return super.onOptionsItemSelected(item);
     }
 
 
+    public void viewForgotPAssword(View view) {
+        FragmentTransaction(R.id.mainlayout,registerFragment);
+    }
+
+    public void viewRegisterClicked(View view) {
+        FragmentTransaction(R.id.mainlayout,registerFragment);
+    }
 }
