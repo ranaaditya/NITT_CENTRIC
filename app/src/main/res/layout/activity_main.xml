@@ -16,9 +16,14 @@
         app:menu="@menu/drawermenu"
         android:layout_gravity="start"
         app:headerLayout="@layout/header" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainlayout">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -69,5 +74,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         app:layout_constraintVertical_bias="0.188" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

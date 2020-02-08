@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +31,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ranaaditya.nitt_central.API.Api;
+import com.ranaaditya.nitt_central.Fragments.AdminFragment;
 import com.ranaaditya.nitt_central.Home.HomeActivity;
 import com.ranaaditya.nitt_central.Models.LoginResponseModel;
 
@@ -43,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
     EditText roll,pass;
     Button login;
     ActionBarDrawerToggle toggle;
-
+    FragmentManager fragmentManager=getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+    AdminFragment adminFragment=AdminFragment.newInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,13 +102,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        // this has fucked up basdly !!!
+        // items are not responding properly !!
+        // need to be chacked !!!
         DrawerLayout drawerLayout=findViewById(R.id.drawermain);
          toggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.app_name,R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.drawermenu, menu);
+        return true;
     }
 
     @Override
@@ -109,13 +127,14 @@ public class MainActivity extends AppCompatActivity {
         if(toggle.onOptionsItemSelected(item)) return true;
         int itemid=item.getItemId();
         switch (itemid){
-            case  R.id.admin : Toast.makeText(MainActivity.this,"HELLO FRND",Toast.LENGTH_SHORT);
-            case R.id.council :  Toast.makeText(MainActivity.this,"HELLO FRND",Toast.LENGTH_SHORT);
-            case R.id.academics : Toast.makeText(MainActivity.this,"HELLO FRND",Toast.LENGTH_SHORT);
-            case  R.id.shops : Toast.makeText(this,"HELLO FRND",Toast.LENGTH_SHORT);
-            case  R.id.applogout : Toast.makeText(this,"HELLO FRND",Toast.LENGTH_SHORT);
+            case  R.id.admin : {fragmentTransaction.add(R.id.mainlayout,adminFragment).addToBackStack(null).commit(); break;}
+            case R.id.council : {Intent intent= new Intent(MainActivity.this,test.class); startActivity(intent); break;}
+            case R.id.academics : {Intent intent= new Intent(MainActivity.this,test.class); startActivity(intent); break;}
+            case  R.id.shops : {Intent intent= new Intent(MainActivity.this,test.class); startActivity(intent); break;}
+            case  R.id.applogout : {Intent intent= new Intent(MainActivity.this,test.class); startActivity(intent); break;}
         }
 return super.onOptionsItemSelected(item);
     }
+
 
 }
