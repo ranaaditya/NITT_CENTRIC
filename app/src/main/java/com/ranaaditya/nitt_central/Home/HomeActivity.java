@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
     Double lat,lon;
     TextView nearest;
     RecyclerView shops;
-    String flag=null;
+    ArrayList<ShopModel> mresponse=null;
     Button addNearest;
     FusedLocationProviderClient mFusedLocationClient;
 
@@ -101,15 +101,7 @@ public class HomeActivity extends AppCompatActivity {
                                     ShopsAdapter adapter=new ShopsAdapter(getApplicationContext(),response.body());
                                     shops.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
                                     shops.setAdapter(adapter);
-                                    addNearest.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            Intent intent=new Intent(getApplicationContext(),PaymentActivity.class);
-                                            intent.putExtra("payment_upi_id",response.body().get(0).getUpi());
-                                            intent.putExtra("payment_note","111118114");
-                                            intent.putExtra("payment_name",response.body().get(0).getName());
-                                        }
-                                    });
+                                    mresponse=response.body();
                                 }
 
                                 @Override
@@ -119,5 +111,20 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     }
                 });
+        addNearest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent=new Intent(getApplicationContext(),PaymentActivity.class);
+                    intent.putExtra("payment_upi_id","shohanduttaroy99@oksbi");
+                    intent.putExtra("payment_note","111118114");
+                    intent.putExtra("payment_name","shohan roy");
+                    startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 }
