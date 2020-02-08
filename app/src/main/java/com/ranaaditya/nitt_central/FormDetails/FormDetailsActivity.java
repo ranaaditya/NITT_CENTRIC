@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FormDetailsActivity extends AppCompatActivity implements UploadInterface {
     RecyclerView links,files;
     UploadsAdapter adapter2;
-    private  const  int REQUEST_CODE=99;
+    private final   int REQUEST_CODE=99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class FormDetailsActivity extends AppCompatActivity implements UploadInte
                     Uri fileUri=data.getData();
                     String path=fileUri.getPath(); // path of the file selected
                     if(fileUri!=null) {
-                        File uploadfile = new File(fileUri); //selected file  is in File format so may you can use it as it is
+                        File uploadfile = new File(String.valueOf(fileUri)); //selected file  is in File format so may you can use it as it is
 
                         // TODO use library here for upoading this file  over server
                     }
