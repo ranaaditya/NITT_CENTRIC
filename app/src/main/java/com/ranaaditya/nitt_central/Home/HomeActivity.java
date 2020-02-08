@@ -19,6 +19,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ranaaditya.nitt_central.API.Api;
 import com.ranaaditya.nitt_central.Models.ShopModel;
+import com.ranaaditya.nitt_central.Payment.Payment;
+import com.ranaaditya.nitt_central.Payment.PaymentActivity;
 import com.ranaaditya.nitt_central.R;
 
 import java.util.ArrayList;
@@ -51,6 +55,8 @@ public class HomeActivity extends AppCompatActivity {
     Double lat,lon;
     TextView nearest;
     RecyclerView shops;
+    ArrayList<ShopModel> mresponse=null;
+    Button addNearest;
     FusedLocationProviderClient mFusedLocationClient;
 
     @Override
@@ -66,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         nearest=findViewById(R.id.closest_shop);
         shops=findViewById(R.id.shops_recycler);
+        addNearest=findViewById(R.id.add_nearest);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mFusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -89,11 +96,12 @@ public class HomeActivity extends AppCompatActivity {
                             Call<ArrayList<ShopModel>> call=api.getShops(lat,lon,sharedPreferences.getString("Token",""));
                             call.enqueue(new Callback<ArrayList<ShopModel>>() {
                                 @Override
-                                public void onResponse(Call<ArrayList<ShopModel>> call, Response<ArrayList<ShopModel>> response) {
+                                public void onResponse(Call<ArrayList<ShopModel>> call, final Response<ArrayList<ShopModel>> response) {
                                     nearest.setText(response.body().get(0).getName());
                                     ShopsAdapter adapter=new ShopsAdapter(getApplicationContext(),response.body());
                                     shops.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
                                     shops.setAdapter(adapter);
+                                    mresponse=response.body();
                                 }
 
                                 @Override
@@ -103,5 +111,20 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     }
                 });
+        addNearest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent intent=new Intent(getApplicationContext(),PaymentActivity.class);
+                    intent.putExtra("payment_upi_id",mresponse.get(0).getUpi());
+                    intent.putExtra("payment_note","111118114");
+                    intent.putExtra("payment_name",mresponse.get(0).getName());
+                    startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 }
