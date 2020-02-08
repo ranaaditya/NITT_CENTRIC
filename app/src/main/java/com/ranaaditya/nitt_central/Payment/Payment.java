@@ -26,8 +26,8 @@ public class Payment {
         return false;
     }
 
-    private void upiPaymentDataOperation(ArrayList<String> data) {
-        if (isConnectionAvailable(MainActivity.this)) {
+    private void upiPaymentDataOperation(ArrayList<String> data,Context context) {
+        if (isConnectionAvailable(context)) {
             String str = data.get(0);
             Log.d("UPIPAY", "upiPaymentDataOperation: "+str);
             String paymentCancel = "";
@@ -52,21 +52,21 @@ public class Payment {
 
             if (status.equals("success")) {
                 //Code to handle successful transaction here.
-                Toast.makeText(MainActivity.this, "Transaction successful.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Transaction successful.", Toast.LENGTH_SHORT).show();
                 Log.d("UPI", "responseStr: "+approvalRefNo);
             }
             else if("Payment cancelled by user.".equals(paymentCancel)) {
-                Toast.makeText(MainActivity.this, "Payment cancelled by user.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Payment cancelled by user.", Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(MainActivity.this, "Transaction failed.Please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Transaction failed.Please try again", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(MainActivity.this, "Internet connection is not available. Please check and try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Internet connection is not available. Please check and try again", Toast.LENGTH_SHORT).show();
         }
     }
 
-    void payusingupi(String amount,String upiId,String name,String note){
+    void payusingupi(String amount,String upiId,String name,String note,Context context){
 
         Uri uri=Uri.parse("upi://pay").buildUpon()
                 .appendQueryParameter("pa",upiId)
@@ -79,10 +79,10 @@ public class Payment {
         Intent upi_payment_intent=new Intent(Intent.ACTION_VIEW);
         upi_payment_intent.setData(uri);
         Intent chooser=Intent.createChooser(upi_payment_intent,"pay with");
-        if (null!=chooser.resolveActivity(getPackageManager())){
-            startActivityForResult(chooser,UPI_PAYMENT);
+        if (null!=chooser.resolveActivity(context.getPackageManager())){
+            //startActivityForResult(chooser,UPI_PAYMENT);
         }else{
-            Toast.makeText(MainActivity.this,"No UPI app found, please install one to continue",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"No UPI app found, please install one to continue",Toast.LENGTH_SHORT).show();
         }
     }
 }
