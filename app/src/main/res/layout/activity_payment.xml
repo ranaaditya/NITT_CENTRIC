@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Payment.PaymentActivity">
+
+    <TextView
+        android:id="@+id/paymentheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PAYING TO - "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentheading"
+        app:layout_constraintVertical_bias="0.188"
+        tools:layout_editor_absoluteX="-16dp">
+
+        <EditText
+            android:id="@+id/payamount"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="AMOUNT WANT TO PAY"
+            android:textAlignment="center"/>
+    </com.google.android.material.textfield.TextInputLayout>
+<!--
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:layout_constraintVertical_bias="0.092"
+        android:layout_margin="8dp"
+        tools:layout_editor_absoluteX="-8dp" >
+        <EditText
+            android:id="@+id/payname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    -->
+    <Button
+        android:id="@+id/paybutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PAY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:layout_constraintVertical_bias="0.289" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.ranaaditya.nitt_central.Payment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -7,12 +8,11 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.ranaaditya.nitt_central.MainActivity;
-
 import java.util.ArrayList;
 
 public class Payment {
+    final int UPI_PAYMENT = 0;
+
     public static boolean isConnectionAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
@@ -26,7 +26,7 @@ public class Payment {
         return false;
     }
 
-    private void upiPaymentDataOperation(ArrayList<String> data,Context context) {
+    public void upiPaymentDataOperation(ArrayList<String> data,Context context) {
         if (isConnectionAvailable(context)) {
             String str = data.get(0);
             Log.d("UPIPAY", "upiPaymentDataOperation: "+str);
@@ -80,9 +80,12 @@ public class Payment {
         upi_payment_intent.setData(uri);
         Intent chooser=Intent.createChooser(upi_payment_intent,"pay with");
         if (null!=chooser.resolveActivity(context.getPackageManager())){
-            //startActivityForResult(chooser,UPI_PAYMENT);
+            Activity activity = (Activity)context;
+
+            activity.startActivityForResult(chooser,UPI_PAYMENT);
         }else{
             Toast.makeText(context,"No UPI app found, please install one to continue",Toast.LENGTH_SHORT).show();
         }
     }
+
 }
