@@ -6,11 +6,14 @@ import com.ranaaditya.nitt_central.Models.ShopModel;
 
 import java.util.ArrayList;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface Api {
     String base_url="http://10.1.96.247:8000/";
@@ -28,4 +31,12 @@ public interface Api {
 
     @GET("getForms")
     Call<ArrayList<FormModel>> getForms();
+
+    @FormUrlEncoded
+    @POST
+    Call<FormModel> specificForm(@Field("id") int id);
+
+    @Multipart
+    @POST("submit")
+    Call<String> submitDoc(@Part MultipartBody.Part file,@Part("token") String token,@Part("UserFormId") int id);
 }
