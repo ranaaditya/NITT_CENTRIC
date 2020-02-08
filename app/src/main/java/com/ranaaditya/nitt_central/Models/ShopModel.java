@@ -7,9 +7,15 @@ public class ShopModel {
     String name;
     @SerializedName("id")
     int id;
+    @SerializedName("upiId")
+    String upi;
 
     public String getName() {
         return name;
     }
     public int getId(){return id;}
+
+    public String getUpi() {
+        return upi;
+    }
 }
