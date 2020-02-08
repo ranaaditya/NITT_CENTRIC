@@ -2,10 +2,13 @@ package com.ranaaditya.nitt_central.FormDetails;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
@@ -14,6 +17,7 @@ import com.ranaaditya.nitt_central.API.Api;
 import com.ranaaditya.nitt_central.Models.FormModel;
 import com.ranaaditya.nitt_central.R;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -25,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FormDetailsActivity extends AppCompatActivity implements UploadInterface {
     RecyclerView links,files;
     UploadsAdapter adapter2;
+    private  const  int REQUEST_CODE=99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +68,33 @@ public class FormDetailsActivity extends AppCompatActivity implements UploadInte
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case REQUEST_CODE:{
+                if(resultCode==RESULT_OK){
+                    Uri fileUri=data.getData();
+                    String path=fileUri.getPath(); // path of the file selected
+                    if(fileUri!=null) {
+                        File uploadfile = new File(fileUri); //selected file  is in File format so may you can use it as it is
+
+                        // TODO use library here for upoading this file  over server
+                    }
+
+                }
+                break;
+            }
+        }
+
         adapter2.onActivityResult(requestCode, resultCode, data);
 
     }
 
     @Override
     public void getUpload(int i) {
+
+        Intent fileIntent=new Intent(Intent.ACTION_GET_CONTENT);
+        fileIntent.setType("*.pdf");
+        startActivityForResult(fileIntent,REQUEST_CODE);
+
 
     }
 }
