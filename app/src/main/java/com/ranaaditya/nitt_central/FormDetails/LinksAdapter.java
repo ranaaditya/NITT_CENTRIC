@@ -28,8 +28,8 @@ public class LinksAdapter extends RecyclerView.Adapter<LinksAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.form_list, parent, false);
-        return new LinksAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.links_list, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override

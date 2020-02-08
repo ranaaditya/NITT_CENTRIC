@@ -32,7 +32,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.form_list, parent, false);
-        return new FormsAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -42,6 +42,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(mContext, FormDetailsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("formid",forms.get(position).getId());
                 mContext.startActivity(intent);
             }

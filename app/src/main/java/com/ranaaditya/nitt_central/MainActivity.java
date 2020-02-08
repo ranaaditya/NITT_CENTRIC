@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ranaaditya.nitt_central.API.Api;
+import com.ranaaditya.nitt_central.Form.FormsActivity;
 import com.ranaaditya.nitt_central.Fragments.AdminFragment;
 import com.ranaaditya.nitt_central.Fragments.FestFragment;
 import com.ranaaditya.nitt_central.Fragments.OthersFragment;
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("Token",response.body().getToken());
                             editor.commit();
                             Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(getApplicationContext(), HomeActivity.class);
+                            Intent intent=new Intent(getApplicationContext(), FormsActivity.class);
                             startActivity(intent);
                         }
                         else {

@@ -10,7 +10,10 @@ import com.ranaaditya.nitt_central.API.Api;
 import com.ranaaditya.nitt_central.Models.FormModel;
 import com.ranaaditya.nitt_central.Models.ShopModel;
 import com.ranaaditya.nitt_central.R;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -46,11 +49,12 @@ public class FormsActivity extends AppCompatActivity {
                 FormsAdapter adapter=new FormsAdapter(getApplicationContext(),response.body());
                 forms.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 forms.setAdapter(adapter);
+                Toast.makeText(getApplicationContext(),"fuck",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<ArrayList<FormModel>> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }

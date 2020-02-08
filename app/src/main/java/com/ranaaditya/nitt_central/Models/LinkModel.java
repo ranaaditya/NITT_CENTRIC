@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class LinkModel {
     @SerializedName("name")
     String name;
-    @SerializedName("url")
+    @SerializedName("link")
     String url;
 
     public String getName() {
