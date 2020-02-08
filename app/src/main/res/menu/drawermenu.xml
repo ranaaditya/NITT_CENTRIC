@@ -5,6 +5,7 @@
     <item  android:id="@+id/council" android:icon="@drawable/star" android:title="council" />
     <item  android:id="@+id/shops" android:icon="@drawable/star" android:title="shops"/>
     <item  android:id="@+id/academics" android:icon="@drawable/star" android:title="academics"/>
+    <item android:id="@+id/etracking" android:icon="@drawable/star" android:title="E-tracking"/>
     <item android:id="@+id/applogout" android:icon="@drawable/star" android:title="logout"/>
 
 </menu>

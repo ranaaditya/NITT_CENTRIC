@@ -5,9 +5,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -37,6 +39,7 @@ import com.ranaaditya.nitt_central.Fragments.FestFragment;
 import com.ranaaditya.nitt_central.Fragments.OthersFragment;
 import com.ranaaditya.nitt_central.Fragments.ShopsFragment;
 import com.ranaaditya.nitt_central.Home.HomeActivity;
+import com.ranaaditya.nitt_central.Maps.MapsActivity;
 import com.ranaaditya.nitt_central.Models.LoginResponseModel;
 
 import retrofit2.Call;
@@ -144,6 +147,10 @@ public class MainActivity extends AppCompatActivity {
                 break; }
             case  R.id.shops : { FragmentTransaction(R.id.mainlayout,shopsFragment);
                 break; }
+            case R.id.etracking : {
+                Intent intent=new Intent(MainActivity.this,MapsActivity.class);
+                startActivity(intent);
+            }
             case  R.id.applogout : {finish();}
         }
 return super.onOptionsItemSelected(item);
@@ -159,6 +166,7 @@ return super.onOptionsItemSelected(item);
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(res_id,fragment).addToBackStack(null);
         fragmentTransaction.commit();
-
     }
+
+
 }
