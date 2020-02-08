@@ -6,7 +6,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/common_full_open_on_phone"
+        android:src="@drawable/user"
         android:background="#000000"
         android:id="@+id/userimage"/>
 </LinearLayout>

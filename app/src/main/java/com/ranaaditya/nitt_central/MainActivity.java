@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -32,6 +33,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ranaaditya.nitt_central.API.Api;
 import com.ranaaditya.nitt_central.Fragments.AdminFragment;
+import com.ranaaditya.nitt_central.Fragments.FestFragment;
+import com.ranaaditya.nitt_central.Fragments.OthersFragment;
+import com.ranaaditya.nitt_central.Fragments.ShopsFragment;
 import com.ranaaditya.nitt_central.Home.HomeActivity;
 import com.ranaaditya.nitt_central.Models.LoginResponseModel;
 
@@ -48,9 +52,11 @@ public class MainActivity extends AppCompatActivity {
     EditText roll,pass;
     Button login;
     ActionBarDrawerToggle toggle;
-    FragmentManager fragmentManager=getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
     AdminFragment adminFragment=AdminFragment.newInstance();
+    OthersFragment othersFragment=OthersFragment.newInstance();
+    ShopsFragment shopsFragment=ShopsFragment.newInstance();
+    FestFragment festFragment=FestFragment.newInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,14 +133,32 @@ public class MainActivity extends AppCompatActivity {
         if(toggle.onOptionsItemSelected(item)) return true;
         int itemid=item.getItemId();
         switch (itemid){
-            case  R.id.admin : {fragmentTransaction.add(R.id.mainlayout,adminFragment).addToBackStack(null).commit(); break;}
-            case R.id.council : {Intent intent= new Intent(MainActivity.this,test.class); startActivity(intent); break;}
-            case R.id.academics : {Intent intent= new Intent(MainActivity.this,test.class); startActivity(intent); break;}
-            case  R.id.shops : {Intent intent= new Intent(MainActivity.this,test.class); startActivity(intent); break;}
-            case  R.id.applogout : {Intent intent= new Intent(MainActivity.this,test.class); startActivity(intent); break;}
+            case  R.id.admin : {
+                //fragmentTransaction.add(R.id.mainlayout,adminFragment).addToBackStack(null).commit(); break;
+                FragmentTransaction(R.id.mainlayout,adminFragment);
+                break;
+            }
+            case R.id.council : { FragmentTransaction(R.id.mainlayout,festFragment);
+                break; }
+            case R.id.academics : {FragmentTransaction(R.id.mainlayout,othersFragment);
+                break; }
+            case  R.id.shops : { FragmentTransaction(R.id.mainlayout,shopsFragment);
+                break; }
+            case  R.id.applogout : {finish();}
         }
 return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
 
+        super.onBackPressed();
+    }
+    void FragmentTransaction(int res_id, Fragment fragment){
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(res_id,fragment).addToBackStack(null);
+        fragmentTransaction.commit();
+
+    }
 }

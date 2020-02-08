@@ -12,17 +12,16 @@ import android.view.ViewGroup;
 
 import com.ranaaditya.nitt_central.R;
 
-
-public class shopsFragment extends Fragment {
+public class OthersFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public shopsFragment() {
+    public OthersFragment() {
         // Required empty public constructor
     }
 
-    public static shopsFragment newInstance(String param1, String param2) {
-        shopsFragment fragment = new shopsFragment();
+    public static OthersFragment newInstance() {
+        OthersFragment fragment = new OthersFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -37,7 +36,7 @@ public class shopsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shops, container, false);
+        return inflater.inflate(R.layout.fragment_others, container, false);
     }
 
     public void onButtonPressed(Uri uri) {
@@ -62,9 +61,7 @@ public class shopsFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }
