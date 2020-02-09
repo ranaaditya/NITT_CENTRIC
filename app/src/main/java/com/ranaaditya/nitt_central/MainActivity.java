@@ -53,6 +53,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     final int UPI_PAYMENT = 0;
     private List<Integer> list=new ArrayList<>();
+    boolean isloggedin=false;
+    SharedPreferences loggedin;
 
     EditText roll,pass;
     Button login;
@@ -68,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loggedin=getSharedPreferences("loggedstatus",MODE_PRIVATE);
+        Log.d("STATUS", String.valueOf(loggedin.getBoolean("loggedstatus",true)));
         SharedPreferences sharedPreferences
                 = getSharedPreferences("MySharedPref",
                 MODE_PRIVATE);
@@ -97,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         if(response.body().getCode()==200)
                         {
                             editor.putString("Token",response.body().getToken());
+                            editor.putBoolean("loggedstatus",true);
                             editor.commit();
                             Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(getApplicationContext(), FormsActivity.class);
@@ -130,8 +135,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.drawermenu, menu);
+        //this function needs to be tested
+        //not very confirm about its vulnerability
+
+        if (loggedin.getBoolean("loggedstatus",false));
+        if (isloggedin) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.drawermenu, menu);
+        }
         return true;
     }
 
@@ -179,5 +190,9 @@ return super.onOptionsItemSelected(item);
 
     public void viewRegisterClicked(View view) {
         FragmentTransaction(R.id.mainlayout,registerFragment);
+    }
+
+    public void logout(View view) {
+        finish();
     }
 }

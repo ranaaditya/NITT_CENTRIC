@@ -25,6 +25,7 @@
             <TextView
                 style="@style/headerTextPrimary"
                 android:layout_marginTop="@dimen/loginViewsMargin"
+                android:fontFamily="@font/raleway_medium"
                 android:text="Login" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -49,6 +50,7 @@
                     android:id="@+id/loginwebmailpassword"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_password_hint"
+                    android:fontFamily="@font/raleway_medium"
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -57,6 +59,7 @@
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/raleway_medium"
                 android:onClick="viewForgotPAssword"
                 android:text="Forgot Password?"
                 android:textColor="@color/primaryTextColor"
@@ -65,6 +68,7 @@
             <Button
                 android:id="@+id/loginbutton"
                 style="@style/loginButton"
+                android:fontFamily="@font/raleway_medium"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:text="Login" />
@@ -72,6 +76,7 @@
             <TextView
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
+                android:fontFamily="@font/raleway_medium"
                 android:onClick="viewRegisterClicked"
                 android:text="@string/login_signup_hint"
                 android:textAlignment="center"

@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:cardBackgroundColor="#e10d53"
+        app:cardBackgroundColor="#28a1eb"
         android:layout_margin="10dp"
         app:cardCornerRadius="20dp">
         <RelativeLayout
@@ -22,20 +22,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pay To"
+                android:fontFamily="@font/raleway_medium"
                 android:gravity="center_horizontal"
                 android:textSize="20sp"/>
+
             <TextView
                 android:id="@+id/closest_shop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text_payto"
-                android:text="Example Shop"
+                android:fontFamily="@font/raleway_medium"
                 android:gravity="center_horizontal"
-                android:textSize="35sp"/>
+                android:text="Example Shop"
+                android:textColor="#ffffff"
+                android:textSize="35sp" />
             <Button
                 android:id="@+id/add_nearest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/buttonback"
                 android:layout_below="@+id/closest_shop"
                 android:layout_margin="20dp"
                 android:text="yes"/>
@@ -45,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Other Shops"
+        android:fontFamily="@font/raleway_medium"
         android:gravity="center_horizontal"
         android:textSize="30sp"
         android:layout_margin="15dp"/>
