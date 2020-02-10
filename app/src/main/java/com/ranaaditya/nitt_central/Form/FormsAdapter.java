@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,7 @@ import com.ranaaditya.nitt_central.R;
 
 import java.util.ArrayList;
 
-public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder>{
+public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.ViewHolder> {
 
     Context mContext;
     ArrayList<FormModel> forms;

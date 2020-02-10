@@ -66,7 +66,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView shopName;
-        ImageView shopImage;
+        de.hdodenhof.circleimageview.CircleImageView shopImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

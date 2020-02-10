@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                             editor.putBoolean("loggedstatus",true);
                             editor.commit();
                             Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
-                            Intent intent=new Intent(getApplicationContext(), FormsActivity.class);
+                            Intent intent=new Intent(getApplicationContext(), HomeActivity.class);
                             startActivity(intent);
                         }
                         else {
@@ -138,11 +138,12 @@ public class MainActivity extends AppCompatActivity {
         //this function needs to be tested
         //not very confirm about its vulnerability
 
-        if (loggedin.getBoolean("loggedstatus",false));
-        if (isloggedin) {
+//        if (loggedin.getBoolean("loggedstatus",false));
+//        if (isloggedin) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.drawermenu, menu);
-        }
+//        }
+
         return true;
     }
 

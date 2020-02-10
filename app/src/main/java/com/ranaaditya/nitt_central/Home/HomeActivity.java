@@ -19,8 +19,12 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +39,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ranaaditya.nitt_central.API.Api;
+import com.ranaaditya.nitt_central.Form.FormsActivity;
 import com.ranaaditya.nitt_central.Models.ShopModel;
 import com.ranaaditya.nitt_central.Payment.Payment;
 import com.ranaaditya.nitt_central.Payment.PaymentActivity;
@@ -53,6 +58,7 @@ public class HomeActivity extends AppCompatActivity {
     LocationManager locationManager;
     int PERMISSION_ID = 44;
     Double lat,lon;
+    RadioGroup paymentMethod;
     TextView nearest;
     RecyclerView shops;
     ArrayList<ShopModel> mresponse=null;
@@ -70,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
                 = getSharedPreferences("MySharedPref",
                 MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
+        paymentMethod=findViewById(R.id.payment_radio);
         nearest=findViewById(R.id.closest_shop);
         shops=findViewById(R.id.shops_recycler);
         addNearest=findViewById(R.id.add_nearest);
@@ -115,10 +122,20 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    int selectedId=paymentMethod.getCheckedRadioButtonId();
                     Intent intent=new Intent(getApplicationContext(),PaymentActivity.class);
                     intent.putExtra("payment_upi_id",mresponse.get(0).getUpi());
                     intent.putExtra("payment_note","111118114");
                     intent.putExtra("payment_name",mresponse.get(0).getName());
+                    intent.putExtra("id",mresponse.get(0).getId());
+                    switch (selectedId){
+                        case R.id.wallet:
+                            intent.putExtra("method",0);
+                            break;
+                        case R.id.upi:
+                            intent.putExtra("method",1);
+                            break;
+                    }
                     startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -127,4 +144,27 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.forms_menu:
+                Intent intent=new Intent(getApplicationContext(), FormsActivity.class);
+                startActivity(intent);
+                break;
+            // action with ID action_settings was selected
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+
 }

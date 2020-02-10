@@ -30,10 +30,13 @@
             android:label="@string/title_activity_maps"></activity>
         <activity android:name=".Payment.PaymentActivity" />
         <activity android:name=".test" />
-        <activity android:name=".Home.HomeActivity" />
-        <activity android:name=".Form.FormsActivity" />
+        <activity android:name=".Home.HomeActivity"
+            android:noHistory="true"/>
+        <activity android:name=".Form.FormsActivity"
+            android:noHistory="true"/>
         <activity android:name=".FormDetails.FormDetailsActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

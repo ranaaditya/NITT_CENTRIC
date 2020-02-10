@@ -9,7 +9,7 @@
         android:id="@+id/form_list_card"
         android:layout_margin="20dp"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="#28a1eb"
+        app:cardBackgroundColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="200dp">
         <TextView
@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Form"
-            android:textColor="#ffffff"
+            android:textColor="@color/primaryTextColor"
             android:fontFamily="@font/raleway_medium"
             android:textSize="50sp"/>
     </androidx.cardview.widget.CardView>

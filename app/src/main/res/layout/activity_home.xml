@@ -6,6 +6,22 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Home.HomeActivity">
+    <RadioGroup
+        android:id="@+id/payment_radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="Wallet"/>
+            <RadioButton
+                android:id="@+id/upi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UPI"/>
+    </RadioGroup>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -36,14 +52,28 @@
                 android:text="Example Shop"
                 android:textColor="#ffffff"
                 android:textSize="35sp" />
-            <Button
-                android:id="@+id/add_nearest"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/buttonback"
                 android:layout_below="@+id/closest_shop"
-                android:layout_margin="20dp"
-                android:text="yes"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_done_black_24dp"/>
+
+                <Button
+                    android:id="@+id/add_nearest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="#00000000"
+                    android:elevation="0dp"
+                    android:text="yes"/>
+
+            </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
     <TextView

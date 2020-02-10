@@ -1,10 +1,12 @@
 package com.ranaaditya.nitt_central.Payment;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -16,9 +18,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.ranaaditya.nitt_central.API.Api;
+import com.ranaaditya.nitt_central.Models.ShopModel;
 import com.ranaaditya.nitt_central.R;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PaymentActivity extends AppCompatActivity {
     private   String UPI_ID;
@@ -27,11 +39,13 @@ public class PaymentActivity extends AppCompatActivity {
     private   String  AMOUNT;
     private   String NOTE;
     boolean isready;
-
+    int toid;
     public   Payment payment;
     Button paymentbutton;
+    ConstraintLayout parent;
     EditText payment_amount;
     TextView heading;
+    int method;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +55,14 @@ public class PaymentActivity extends AppCompatActivity {
         payment=new Payment();
         heading=findViewById(R.id.paymentheading);
 
+        final SharedPreferences sharedPreferences
+                = getSharedPreferences("MySharedPref",
+                MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+
         payment_amount=findViewById(R.id.payamount);
         paymentbutton=findViewById(R.id.paybutton);
+        parent=findViewById(R.id.payment_parent);
 
         Intent paymentinten  = getIntent();
         UPI_ID=paymentinten.getStringExtra("payment_upi_id");
@@ -51,7 +71,22 @@ public class PaymentActivity extends AppCompatActivity {
         AMOUNT=payment_amount.getText().toString();
         NOTE=paymentinten.getStringExtra("payment_note");
 
+        toid=paymentinten.getIntExtra("id",1);
+
+        method=paymentinten.getIntExtra("method",1);
+
         NAME=paymentinten.getStringExtra("payment_name");
+        switch (NAME){
+            case "Shop3":
+                parent.setBackground(getResources().getDrawable(R.drawable.store));
+                break;
+            case "Shop1":
+                parent.setBackground(getResources().getDrawable(R.drawable.juiceimage));
+                break;
+            case "Shop2":
+                parent.setBackground(getResources().getDrawable(R.drawable.cakeimage));
+                break;
+        }
 
         if(heading!=null){
             heading.append(NAME+"BY"+NOTE);
@@ -61,8 +96,34 @@ public class PaymentActivity extends AppCompatActivity {
             paymentbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AMOUNT=payment_amount.getText().toString();
-                    payusingupi(AMOUNT,UPI_ID,NAME,NOTE,PaymentActivity.this);
+                    if(method==1) {
+                        AMOUNT = payment_amount.getText().toString();
+                        payusingupi(AMOUNT, UPI_ID, NAME, NOTE, PaymentActivity.this);
+                    }
+                    else {
+                        Gson gson = new GsonBuilder()
+                                .setLenient()
+                                .create();
+
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(Api.base_url)
+                                .addConverterFactory(GsonConverterFactory.create(gson))
+                                .build();
+
+                        Api api = retrofit.create(Api.class);
+                        Call<String> call=api.walletPayment(sharedPreferences.getString("Token",""),toid,Integer.parseInt(AMOUNT));
+                        call.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                Toast.makeText(getApplicationContext(),"Payment Done",Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
+                    }
                 }
             });
         }

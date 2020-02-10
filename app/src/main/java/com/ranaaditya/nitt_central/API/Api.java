@@ -17,7 +17,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 public interface Api {
-    String base_url="http://10.1.96.244:8000/";
+    String base_url="http://10.1.96.247:8000/";
 
     @GET("getForms")
     Call<ArrayList<FormModel>> getForms();
@@ -44,4 +44,8 @@ public interface Api {
     @Multipart
     @POST("updateForm")
     Call<String> submitDoc(@Part MultipartBody.Part file);
+
+    @FormUrlEncoded
+    @POST("payment")
+    Call<String> walletPayment(@Field("token") String token,@Field("toId") int toId,@Field("amount") int amount);
 }

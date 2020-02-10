@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/paymentmenu"
+	android:title="Payments"/>
+
+    <item android:id="@+id/forms_menu"
+	android:title="Forms" />
+</menu>
