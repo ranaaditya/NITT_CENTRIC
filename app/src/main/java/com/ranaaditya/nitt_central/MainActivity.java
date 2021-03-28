@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -49,6 +50,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import tech.bharatx.simple.BharatXTransactionManager;
 
 public class MainActivity extends AppCompatActivity {
     final int UPI_PAYMENT = 0;
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        startPaymentTransaction();
     }
 
     @Override
@@ -195,5 +198,39 @@ return super.onOptionsItemSelected(item);
 
     public void logout(View view) {
         finish();
+    }
+
+    public void startPaymentTransaction() {
+
+        BharatXTransactionManager.initialize(
+                this, "testSimplePartnerId", "testSimpleApiKey", Color.parseColor("#000000"));
+
+        long amountInPaise = 100;
+        String phoneNumber = "9999999999";
+        String userId = "123456";
+        String transactionId = "12345";
+
+        BharatXTransactionManager.startTransaction(
+                this,
+                transactionId, // optional - pass null if you don't want this param
+                userId, // optional - pass null if you don't want this param
+                phoneNumber,
+                amountInPaise,
+                // optional - you can remove this param
+                new BharatXTransactionManager.TransactionListener() {
+                    @Override
+                    public void onSuccess() {
+                        // on success
+                    }
+                    @Override
+                    public void onFailure() {
+                        // on failure - optional, you can remove this
+                        Log.d("Payment Failed", "FAILED");
+                    }
+                    @Override
+                    public void onCancelled() {
+                        // on cancelled - optional, you can remove this
+                    }
+                });
     }
 }
