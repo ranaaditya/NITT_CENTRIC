@@ -45,4 +45,5 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.akexorcist:google-direction-library:1.2.0'
     implementation 'net.gotev:uploadservice:2.1'
+    implementation 'tech.bharatx.sdk:simple:1.0.2'
 }
