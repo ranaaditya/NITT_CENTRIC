@@ -46,4 +46,11 @@ dependencies {
     implementation 'com.akexorcist:google-direction-library:1.2.0'
     implementation 'net.gotev:uploadservice:2.1'
     implementation 'tech.bharatx.sdk:simple:1.0.2'
+
+    def zxing_version = "4.1.0"
+    def zxing_old = "3.3.0"
+
+    // QR Scanning
+    implementation ("com.journeyapps:zxing-android-embedded:$zxing_version"){transitive = true}
+    implementation "com.google.zxing:core:$zxing_old"
 }

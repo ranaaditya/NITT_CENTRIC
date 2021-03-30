@@ -1,6 +1,7 @@
 package com.ranaaditya.nitt_central;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -18,6 +19,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +36,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.ranaaditya.nitt_central.API.Api;
 import com.ranaaditya.nitt_central.Form.FormsActivity;
 import com.ranaaditya.nitt_central.Fragments.AdminFragment;
@@ -167,8 +171,9 @@ public class MainActivity extends AppCompatActivity {
             case  R.id.shops : { FragmentTransaction(R.id.mainlayout,shopsFragment);
                 break; }
             case R.id.etracking : {
-                Intent intent=new Intent(MainActivity.this,MapsActivity.class);
-                startActivity(intent);
+                //Intent intent=new Intent(MainActivity.this,MapsActivity.class);
+                //startActivity(intent);
+                scanQr();
             }
             case  R.id.applogout : {finish();}
         }
@@ -232,5 +237,31 @@ return super.onOptionsItemSelected(item);
                         // on cancelled - optional, you can remove this
                     }
                 });
+    }
+    private void scanQr() {
+        new IntentIntegrator(this).initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        IntentResult result =  IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                if (Patterns.WEB_URL.matcher(result.getContents()).matches()) {
+                    // Open URL
+                    Intent browserIntent =
+                            new Intent(Intent.ACTION_VIEW, Uri.parse(result.getContents()));
+                    startActivity(browserIntent);
+                } else {
+                    Toast.makeText(this, "Scan a valid QR", Toast.LENGTH_LONG).show();
+                    scanQr();
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
