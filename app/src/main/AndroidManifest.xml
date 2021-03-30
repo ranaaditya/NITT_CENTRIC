@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ranaaditya.nitt_central">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -34,6 +35,11 @@
             android:noHistory="true"/>
         <activity android:name=".Form.FormsActivity"
             android:noHistory="true"/>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            tools:replace="android:screenOrientation" />
         <activity android:name=".FormDetails.FormDetailsActivity" />
         <activity android:name=".MainActivity"
             android:noHistory="true">

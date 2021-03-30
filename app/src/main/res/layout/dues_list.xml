@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp">
+
+        <ImageView
+            android:id="@+id/imageOfShop"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/netflix"/>
+
+        <TextView
+            android:id="@+id/nameOfShop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nilam Shop"
+            android:layout_toRightOf="@+id/imageOfShop"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#516b9e"
+            android:layout_marginLeft="20dp"
+            android:letterSpacing="0.03"/>
+
+        <TextView
+            android:id="@+id/dateOfTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="27 Mar 7.30 PM"
+            android:layout_toRightOf="@+id/imageOfShop"
+            android:layout_below="@id/nameOfShop"
+            android:textSize="16dp"
+            android:textColor="#516b9e"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/amountOfTrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-10 Rs"
+            android:textSize="23dp"
+            android:textStyle="bold"
+            android:textColor="#516b9e"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>
